@@ -58,6 +58,18 @@
     document.querySelectorAll('.reveal').forEach((element) => element.classList.add('visible'));
   }
 
+  document.querySelectorAll('[data-project-toggle]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const panelId = button.getAttribute('aria-controls');
+      const panel = panelId ? document.getElementById(panelId) : null;
+      if (!panel) return;
+
+      const willOpen = button.getAttribute('aria-expanded') !== 'true';
+      button.setAttribute('aria-expanded', String(willOpen));
+      panel.hidden = !willOpen;
+    });
+  });
+
   const form = document.querySelector('[data-contact-form]');
   const formStatus = document.querySelector('[data-form-status]');
 
