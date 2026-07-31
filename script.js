@@ -39,6 +39,7 @@
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('visible');
+        entry.target.closest('.process-list')?.classList.add('is-active');
         observer.unobserve(entry.target);
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -35px' });
@@ -57,6 +58,7 @@
     sections.forEach((section) => sectionObserver.observe(section));
   } else {
     document.querySelectorAll('.reveal').forEach((element) => element.classList.add('visible'));
+    document.querySelector('.process-list')?.classList.add('is-active');
   }
 
   const progressRing = document.querySelector('[data-progress-ring]');
