@@ -13,8 +13,8 @@
   <meta property="og:image" content="assets/images/avenro-logo.png">
   <meta property="og:url" content="https://avenrodigital.com/">
   <link rel="icon" type="image/png" href="assets/images/avenro-logo.png">
-  <link rel="stylesheet" href="styles.css?v=20260801-8">
-  <script src="script.js?v=20260801-8" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20260801-11">
+  <script src="script.js?v=20260801-11" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -230,16 +230,14 @@
               <button class="text-link project-link project-modal-open" type="button" data-project-modal-open="social-media" aria-haspopup="dialog" aria-controls="project-gallery-modal">View Project <span aria-hidden="true">↗</span></button>
             </div>
           </article>
-          <article class="project-card reveal delay-two">
-            <!-- Replace this placeholder with: assets/images/projects/video-editing-projects.jpg -->
-            <div class="project-media" data-image-path="assets/images/projects/video-editing-projects.jpg" aria-label="Screenshot placeholder for Video Editing Projects">
-              <span class="project-placeholder-icon" aria-hidden="true">▷</span><span>Video preview coming soon</span>
+          <article class="project-card project-card-has-image reveal delay-two">
+            <div class="project-media project-media-image">
+              <img class="project-featured-image project-featured-image-video-editing" src="assets/images/video-editing/survival-video-01.png" alt="Wilderness video editing preview featuring a survival gear setup" loading="lazy">
             </div>
             <div class="project-body">
               <p class="project-category">Selected Creative Work</p><h3>Video Editing Projects</h3>
               <p>A growing selection of edited video work for clear, engaging business storytelling.</p>
-              <button class="text-link project-link" type="button" data-project-toggle aria-expanded="false" aria-controls="case-video-editing">View Project <span aria-hidden="true">↗</span></button>
-              <div class="case-study" id="case-video-editing" hidden><h4>Challenge</h4><p>Raw footage needs structure, pacing, and brand consistency before it can communicate clearly.</p><h4>Solution</h4><p>The selected work applies purposeful editing, graphics, sound, and formatting for its intended channel.</p><h4>Outcome</h4><p>Project-specific outcomes will be documented only when they can be verified.</p></div>
+              <button class="text-link project-link project-modal-open" type="button" data-project-modal-open="video-editing" aria-haspopup="dialog" aria-controls="project-gallery-modal">View Project <span aria-hidden="true">↗</span></button>
             </div>
           </article>
         </div>
@@ -397,6 +395,8 @@
         </div>
 
         <div class="project-gallery" data-project-gallery aria-label="Project images">
+          <div class="project-gallery-filters" data-project-gallery-filters role="group" aria-label="Filter project previews" hidden></div>
+
           <div class="project-gallery-stage" data-project-gallery-swipe>
             <div class="project-gallery-track" data-project-gallery-track></div>
 
@@ -405,8 +405,14 @@
           </div>
 
           <div class="project-gallery-meta" aria-live="polite" aria-atomic="true">
-            <p data-project-gallery-caption></p>
-            <span data-project-gallery-counter></span>
+            <div class="project-gallery-caption-block">
+              <span class="project-gallery-category" data-project-gallery-category hidden></span>
+              <p data-project-gallery-caption></p>
+            </div>
+            <div class="project-gallery-actions">
+              <a class="project-gallery-watch" data-project-gallery-watch href="" target="_blank" rel="noopener noreferrer" hidden>Watch Video <span aria-hidden="true">↗</span></a>
+              <span class="project-gallery-counter" data-project-gallery-counter></span>
+            </div>
           </div>
 
           <div class="project-gallery-thumbnails" data-project-gallery-thumbnails aria-label="Choose a project image"></div>

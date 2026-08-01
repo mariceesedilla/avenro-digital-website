@@ -276,6 +276,36 @@
         { path: 'assets/images/social-media/youtube-thumbnail-01.png', caption: 'YouTube Thumbnail 01', alt: 'Banana smoothie YouTube video thumbnail' },
         { path: 'assets/images/social-media/youtube-thumbnail-02.png', caption: 'YouTube Thumbnail 02', alt: 'Berry banana smoothie YouTube video thumbnail' }
       ]
+    },
+    'video-editing': {
+      title: 'Video Editing Projects',
+      label: 'Selected Creative Work',
+      overview: 'A selected collection of short-form video editing work created for health, wellness, educational, and wilderness-preparedness content.',
+      challenge: 'Short-form content needs to communicate a clear message quickly while maintaining strong pacing, readable text, visual interest, and platform-friendly formatting.',
+      solution: 'Raw ideas and footage were developed into vertical video edits using structured storytelling, captions, visual pacing, branded elements, supporting graphics, and engaging opening hooks.',
+      features: [
+        'Short-form vertical video editing',
+        'Health and wellness content',
+        'Wilderness and preparedness content',
+        'On-screen captions and text',
+        'Visual pacing and transitions',
+        'Supporting graphics and imagery',
+        'Mobile-first formatting',
+        'Social-platform-ready creative work'
+      ],
+      filters: [
+        { value: 'all', label: 'All' },
+        { value: 'health-wellness', label: 'Health & Wellness' },
+        { value: 'wilderness-preparedness', label: 'Wilderness & Preparedness' }
+      ],
+      images: [
+        { path: 'assets/images/video-editing/health-video-01.png', caption: 'Health Video 01', category: 'health-wellness', categoryLabel: 'Health & Wellness', alt: 'Health video editing preview about slow arteries', videoUrl: '' },
+        { path: 'assets/images/video-editing/health-video-02.png', caption: 'Health Video 02', category: 'health-wellness', categoryLabel: 'Health & Wellness', alt: 'Health video editing preview about fruit and daily wellness', videoUrl: '' },
+        { path: 'assets/images/video-editing/health-video-03.png', caption: 'Health Video 03', category: 'health-wellness', categoryLabel: 'Health & Wellness', alt: 'Wellness video editing preview featuring a woman walking beside a lake', videoUrl: '' },
+        { path: 'assets/images/video-editing/survival-video-01.png', caption: 'Survival Video 01', category: 'wilderness-preparedness', categoryLabel: 'Wilderness & Preparedness', alt: 'Wilderness video editing preview about survival gear', videoUrl: '' },
+        { path: 'assets/images/video-editing/survival-video-02.png', caption: 'Survival Video 02', category: 'wilderness-preparedness', categoryLabel: 'Wilderness & Preparedness', alt: 'Wilderness video editing preview about carrying fire safely', videoUrl: '' },
+        { path: 'assets/images/video-editing/survival-video-03.png', caption: 'Survival Video 03', category: 'wilderness-preparedness', categoryLabel: 'Wilderness & Preparedness', alt: 'Wilderness video editing preview about cold-weather fire-starting material', videoUrl: '' }
+      ]
     }
   };
 
@@ -297,6 +327,9 @@
   const projectGalleryCaption = projectModal?.querySelector('[data-project-gallery-caption]');
   const projectGalleryCounter = projectModal?.querySelector('[data-project-gallery-counter]');
   const projectGallerySwipeArea = projectModal?.querySelector('[data-project-gallery-swipe]');
+  const projectGalleryFilters = projectModal?.querySelector('[data-project-gallery-filters]');
+  const projectGalleryCategory = projectModal?.querySelector('[data-project-gallery-category]');
+  const projectGalleryWatch = projectModal?.querySelector('[data-project-gallery-watch]');
 
   if (projectModal && projectModalOpeners.length && projectModalClose && projectGalleryTrack && projectGalleryThumbnails) {
     let activeProjectSlide = 0;
@@ -305,6 +338,7 @@
     let lastFocusedElement = null;
     let closeModalTimer = null;
     let swipeStartX = null;
+    let activeProjectImages = [];
 
     const getFocusableModalElements = () => Array.from(projectModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
       .filter((element) => !element.hasAttribute('disabled') && element.getAttribute('aria-hidden') !== 'true' && element.offsetParent !== null);
@@ -327,6 +361,18 @@
       if (projectGalleryCaption) projectGalleryCaption.textContent = activeSlide.dataset.caption || '';
       if (projectGalleryCounter) projectGalleryCounter.textContent = `${activeProjectSlide + 1} / ${slideCount}`;
 
+      const activeImage = activeProjectImages[activeProjectSlide];
+      if (projectGalleryCategory) {
+        projectGalleryCategory.textContent = activeImage?.categoryLabel ? `${activeImage.categoryLabel} · Editing Preview` : '';
+        projectGalleryCategory.hidden = !activeImage?.categoryLabel;
+      }
+      if (projectGalleryWatch) {
+        const videoUrl = activeImage?.videoUrl?.trim();
+        projectGalleryWatch.hidden = !videoUrl;
+        if (videoUrl) projectGalleryWatch.href = videoUrl;
+        else projectGalleryWatch.removeAttribute('href');
+      }
+
       const activeThumbnail = projectThumbnails[activeProjectSlide];
       if (activeThumbnail) {
         const centeredScrollPosition = activeThumbnail.offsetLeft - (projectGalleryThumbnails.clientWidth - activeThumbnail.offsetWidth) / 2;
@@ -335,6 +381,47 @@
           behavior: reducedMotionQuery.matches ? 'auto' : 'smooth'
         });
       }
+    };
+
+    const renderProjectImages = (images) => {
+      activeProjectImages = images;
+      const slides = images.map((image, index) => {
+        const figure = document.createElement('figure');
+        figure.className = 'project-gallery-slide';
+        figure.dataset.caption = image.caption;
+        figure.setAttribute('aria-hidden', String(index !== 0));
+
+        const screenshot = document.createElement('img');
+        screenshot.src = image.path;
+        screenshot.alt = image.alt;
+        screenshot.loading = index === 0 ? 'eager' : 'lazy';
+        screenshot.draggable = false;
+        figure.append(screenshot);
+        return figure;
+      });
+
+      const thumbnails = images.map((image, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.projectSlideIndex = String(index);
+        button.setAttribute('aria-label', `Show ${image.caption}`);
+        button.setAttribute('aria-current', String(index === 0));
+
+        const thumbnail = document.createElement('img');
+        thumbnail.src = image.path;
+        thumbnail.alt = '';
+        thumbnail.loading = 'lazy';
+        button.append(thumbnail);
+        return button;
+      });
+
+      projectGalleryTrack.replaceChildren(...slides);
+      projectGalleryThumbnails.replaceChildren(...thumbnails);
+      projectSlides = Array.from(projectGalleryTrack.querySelectorAll('.project-gallery-slide'));
+      projectThumbnails = Array.from(projectGalleryThumbnails.querySelectorAll('[data-project-slide-index]'));
+      projectModalLayout.scrollTop = 0;
+      projectGalleryThumbnails.scrollLeft = 0;
+      activeProjectSlide = 0;
     };
 
     const renderProjectGallery = (projectKey) => {
@@ -358,43 +445,21 @@
       });
       projectModalFeatures.replaceChildren(...featureItems);
 
-      const slides = project.images.map((image, index) => {
-        const figure = document.createElement('figure');
-        figure.className = 'project-gallery-slide';
-        figure.dataset.caption = image.caption;
-        figure.setAttribute('aria-hidden', String(index !== 0));
+      if (projectGalleryFilters) {
+        const filterButtons = (project.filters || []).map((filter, index) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.dataset.projectFilter = filter.value;
+          button.textContent = filter.label;
+          button.setAttribute('aria-pressed', String(index === 0));
+          return button;
+        });
+        projectGalleryFilters.replaceChildren(...filterButtons);
+        projectGalleryFilters.hidden = !filterButtons.length;
+        projectGalleryFilters.setAttribute('aria-label', `Filter ${project.title} previews`);
+      }
 
-        const screenshot = document.createElement('img');
-        screenshot.src = image.path;
-        screenshot.alt = image.alt;
-        screenshot.loading = index === 0 ? 'eager' : 'lazy';
-        screenshot.draggable = false;
-        figure.append(screenshot);
-        return figure;
-      });
-
-      const thumbnails = project.images.map((image, index) => {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.dataset.projectSlideIndex = String(index);
-        button.setAttribute('aria-label', `Show ${image.caption}`);
-        button.setAttribute('aria-current', String(index === 0));
-
-        const thumbnail = document.createElement('img');
-        thumbnail.src = image.path;
-        thumbnail.alt = '';
-        thumbnail.loading = 'lazy';
-        button.append(thumbnail);
-        return button;
-      });
-
-      projectGalleryTrack.replaceChildren(...slides);
-      projectGalleryThumbnails.replaceChildren(...thumbnails);
-      projectSlides = Array.from(projectGalleryTrack.querySelectorAll('.project-gallery-slide'));
-      projectThumbnails = Array.from(projectGalleryThumbnails.querySelectorAll('[data-project-slide-index]'));
-      projectModalLayout.scrollTop = 0;
-      projectGalleryThumbnails.scrollLeft = 0;
-      activeProjectSlide = 0;
+      renderProjectImages(project.images);
       return true;
     };
 
@@ -439,6 +504,26 @@
       const thumbnail = event.target.closest('[data-project-slide-index]');
       if (!thumbnail || !projectGalleryThumbnails.contains(thumbnail)) return;
       showProjectSlide(Number(thumbnail.dataset.projectSlideIndex));
+    });
+
+    projectGalleryFilters?.addEventListener('click', (event) => {
+      if (!(event.target instanceof Element)) return;
+      const filterButton = event.target.closest('[data-project-filter]');
+      if (!filterButton || !projectGalleryFilters.contains(filterButton)) return;
+      const project = projectGalleryData[projectModal.dataset.project];
+      if (!project) return;
+
+      const selectedFilter = filterButton.dataset.projectFilter;
+      const filteredImages = selectedFilter === 'all'
+        ? project.images
+        : project.images.filter((image) => image.category === selectedFilter);
+      if (!filteredImages.length) return;
+
+      projectGalleryFilters.querySelectorAll('[data-project-filter]').forEach((button) => {
+        button.setAttribute('aria-pressed', String(button === filterButton));
+      });
+      renderProjectImages(filteredImages);
+      showProjectSlide(0);
     });
 
     projectModal.addEventListener('click', (event) => {
