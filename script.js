@@ -247,6 +247,35 @@
         { path: 'assets/images/glow-haven/glow-haven-workflow-07-nurture.png', caption: 'Nurture Workflow', alt: 'Glow Haven long-term nurture workflow diagram' },
         { path: 'assets/images/glow-haven/glow-haven-email-template.png', caption: 'Email Template', alt: 'Glow Haven customer email templates' }
       ]
+    },
+    'social-media': {
+      title: 'Social Media & Creative Content',
+      label: 'Portfolio Build',
+      overview: 'A selected collection of social media designs, content-planning materials, promotional graphics, and video thumbnails created to support consistent and professional online communication.',
+      challenge: 'Businesses often need multiple types of content while maintaining clear messaging, consistent visuals, and an organized publishing schedule across different platforms.',
+      solution: 'Content calendars, scheduled-post previews, branded promotional graphics, social media posts, and video thumbnails were created to help organize content production and strengthen visual consistency.',
+      features: [
+        'Content calendar planning',
+        'Content scheduling layouts',
+        'Promotional graphics',
+        'Social media post designs',
+        'YouTube thumbnails',
+        'Branded visual communication',
+        'Multi-format creative assets',
+        'Organized content preparation'
+      ],
+      images: [
+        { path: 'assets/images/social-media/content-calendar-01.png', caption: 'Content Calendar 01', alt: 'Social media content calendar planning spreadsheet' },
+        { path: 'assets/images/social-media/content-calendar-02.png', caption: 'Content Calendar 02', alt: 'Second social media content calendar planning spreadsheet' },
+        { path: 'assets/images/social-media/content-scheduled-01.png', caption: 'Scheduled Content 01', alt: 'Scheduled social media content planner preview' },
+        { path: 'assets/images/social-media/content-scheduled-02.png', caption: 'Scheduled Content 02', alt: 'Second scheduled social media content planner preview' },
+        { path: 'assets/images/social-media/promo-graphic-01.png', caption: 'Promotional Graphic 01', alt: 'Branded massage and spa promotional graphic' },
+        { path: 'assets/images/social-media/promo-graphic-02.png', caption: 'Promotional Graphic 02', alt: 'Branded self-care spa promotional graphic' },
+        { path: 'assets/images/social-media/social-post-01.png', caption: 'Social Media Post 01', alt: 'Cervical collar safety social media infographic' },
+        { path: 'assets/images/social-media/social-post-02.png', caption: 'Social Media Post 02', alt: 'Wilderness preparation social media infographic' },
+        { path: 'assets/images/social-media/youtube-thumbnail-01.png', caption: 'YouTube Thumbnail 01', alt: 'Banana smoothie YouTube video thumbnail' },
+        { path: 'assets/images/social-media/youtube-thumbnail-02.png', caption: 'YouTube Thumbnail 02', alt: 'Berry banana smoothie YouTube video thumbnail' }
+      ]
     }
   };
 

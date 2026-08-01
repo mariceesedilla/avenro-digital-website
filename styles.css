@@ -215,6 +215,7 @@ em { color: var(--teal); font-style: normal; }
 .project-media-image::after { display: none; }
 .project-featured-image { width: 100%; height: 100%; object-fit: cover; object-position: center 34%; transition: transform 650ms cubic-bezier(.2,.75,.25,1); }
 .project-featured-image-glow-haven { object-position: center top; }
+.project-featured-image-social-media { object-position: center 46%; }
 .project-card-has-image:hover .project-featured-image { transform: scale(1.045); }
 .project-modal-open { display: inline-flex; min-height: 40px; align-items: center; gap: 8px; font-weight: 800; }
 .project-modal-open span { transition: transform var(--transition); }
