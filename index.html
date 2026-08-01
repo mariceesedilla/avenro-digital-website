@@ -13,8 +13,8 @@
   <meta property="og:image" content="assets/images/avenro-logo.png">
   <meta property="og:url" content="https://avenrodigital.com/">
   <link rel="icon" type="image/png" href="assets/images/avenro-logo.png">
-  <link rel="stylesheet" href="styles.css?v=20260801-2">
-  <script src="script.js?v=20260731-2" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20260801-7">
+  <script src="script.js?v=20260801-7" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -200,28 +200,24 @@
           <p>Examples of the focused, practical solutions we build for service-based businesses.</p>
         </div>
         <div class="project-grid">
-          <article class="project-card reveal">
-            <!-- Replace this placeholder with: assets/images/projects/motioncare-clinic-automation.jpg -->
-            <div class="project-media" data-image-path="assets/images/projects/motioncare-clinic-automation.jpg" aria-label="Screenshot placeholder for MotionCare Clinic Automation">
-              <span class="project-placeholder-icon" aria-hidden="true">▧</span><span>Project screenshot coming soon</span>
+          <article class="project-card project-card-has-image reveal">
+            <div class="project-media project-media-image">
+              <img class="project-featured-image" src="assets/images/motioncare/motioncare-landing-page.png" alt="MotionCare clinic automation landing page preview" loading="lazy">
             </div>
             <div class="project-body">
               <p class="project-category">Sample Automation System</p><h3>MotionCare Clinic Automation</h3>
               <p>A sample clinic automation system featuring a landing page, inquiry form, CRM pipeline, booking workflows, appointment reminders, no-show handling, and workflow process maps.</p>
-              <button class="text-link project-link" type="button" data-project-toggle aria-expanded="false" aria-controls="case-motioncare">View Project <span aria-hidden="true">↗</span></button>
-              <div class="case-study" id="case-motioncare" hidden><h4>Challenge</h4><p>Booking inquiries, reminders, and follow-ups need a clear, dependable workflow.</p><h4>Solution</h4><p>The sample system maps inquiry capture, appointment steps, reminders, and follow-up stages.</p><h4>Included materials</h4><ul class="project-materials" aria-label="MotionCare project materials"><li>Landing Pages</li><li>Inquiry Forms</li><li>CRM Pipelines</li><li>Workflow Automations</li><li>Workflow Maps</li><li>Email Templates</li><li>Project Screenshots</li></ul><h4>Outcome</h4><p>This is a sample system. Verified operational outcomes will be documented after implementation.</p></div>
+              <button class="text-link project-link project-modal-open" type="button" data-project-modal-open="motioncare" aria-haspopup="dialog" aria-controls="project-gallery-modal">View Project <span aria-hidden="true">↗</span></button>
             </div>
           </article>
-          <article class="project-card reveal delay-one">
-            <!-- Replace this placeholder with: assets/images/projects/glow-haven-booking-system.jpg -->
-            <div class="project-media" data-image-path="assets/images/projects/glow-haven-booking-system.jpg" aria-label="Screenshot placeholder for Glow Haven Booking and Automation System">
-              <span class="project-placeholder-icon" aria-hidden="true">▧</span><span>Project screenshot coming soon</span>
+          <article class="project-card project-card-has-image reveal delay-one">
+            <div class="project-media project-media-image">
+              <img class="project-featured-image project-featured-image-glow-haven" src="assets/images/glow-haven/glow-haven-landing-page.png" alt="Glow Haven spa and salon landing page preview" loading="lazy">
             </div>
             <div class="project-body">
               <p class="project-category">Portfolio Build</p><h3>Glow Haven Booking &amp; Automation System</h3>
               <p>A complete booking and automation portfolio build featuring landing and booking pages, inquiry forms, CRM pipelines, appointment workflows, follow-ups, review requests, and rebooking systems.</p>
-              <button class="text-link project-link" type="button" data-project-toggle aria-expanded="false" aria-controls="case-glow-haven">View Project <span aria-hidden="true">↗</span></button>
-              <div class="case-study" id="case-glow-haven" hidden><h4>Challenge</h4><p>A booking journey needs organized communication from first inquiry to appointment.</p><h4>Solution</h4><p>The portfolio build brings forms, booking stages, and planned automated communication into one flow.</p><h4>Included materials</h4><ul class="project-materials" aria-label="Glow Haven project materials"><li>Landing Pages</li><li>Booking Pages</li><li>Inquiry Forms</li><li>CRM Pipelines</li><li>Workflow Automations</li><li>Workflow Maps</li><li>Email Templates</li><li>Project Screenshots</li></ul><h4>Outcome</h4><p>The build is ready for portfolio review. Live business results are not yet being reported.</p></div>
+              <button class="text-link project-link project-modal-open" type="button" data-project-modal-open="glow-haven" aria-haspopup="dialog" aria-controls="project-gallery-modal">View Project <span aria-hidden="true">↗</span></button>
             </div>
           </article>
           <article class="project-card reveal delay-one">
@@ -368,6 +364,59 @@
       </div>
     </section>
   </main>
+
+  <!-- Reusable portfolio project gallery modal -->
+  <div class="project-modal" id="project-gallery-modal" data-project-modal role="dialog" aria-modal="true" aria-labelledby="project-modal-title" aria-describedby="project-modal-overview" hidden>
+    <div class="project-modal-panel" data-project-modal-panel>
+      <button class="project-modal-close" type="button" data-project-modal-close aria-label="Close project gallery">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+
+      <div class="project-modal-layout">
+        <div class="project-modal-details">
+          <p class="project-modal-label" data-project-modal-label></p>
+          <h2 id="project-modal-title" data-project-modal-title></h2>
+
+          <section class="project-detail-section">
+            <h3>Project Overview</h3>
+            <p id="project-modal-overview" data-project-modal-overview></p>
+          </section>
+
+          <section class="project-detail-section">
+            <h3>Challenge</h3>
+            <p data-project-modal-challenge></p>
+          </section>
+
+          <section class="project-detail-section">
+            <h3>Solution</h3>
+            <p data-project-modal-solution></p>
+          </section>
+
+          <section class="project-detail-section project-modal-features">
+            <h3>Key Features</h3>
+            <ul data-project-modal-features></ul>
+          </section>
+        </div>
+
+        <div class="project-gallery" data-project-gallery aria-label="Project images">
+          <div class="project-gallery-stage" data-project-gallery-swipe>
+            <div class="project-gallery-track" data-project-gallery-track></div>
+
+            <button class="project-gallery-control project-gallery-previous" type="button" data-project-gallery-previous aria-label="Show previous project image"><span aria-hidden="true">←</span></button>
+            <button class="project-gallery-control project-gallery-next" type="button" data-project-gallery-next aria-label="Show next project image"><span aria-hidden="true">→</span></button>
+          </div>
+
+          <div class="project-gallery-meta" aria-live="polite" aria-atomic="true">
+            <p data-project-gallery-caption></p>
+            <span data-project-gallery-counter></span>
+          </div>
+
+          <div class="project-gallery-thumbnails" data-project-gallery-thumbnails aria-label="Choose a project image"></div>
+          <p class="project-gallery-hint">Use the arrow keys or swipe to explore the project.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="container footer-grid">

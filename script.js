@@ -182,6 +182,293 @@
     });
   });
 
+  // Reusable portfolio project modal and carousel
+  const projectGalleryData = {
+    motioncare: {
+      title: 'MotionCare Clinic Automation',
+      label: 'Sample Automation System',
+      overview: 'MotionCare is a sample clinic automation system designed to organize patient inquiries, appointment booking, follow-up communication, and workflow visibility through landing pages, forms, CRM pipelines, automations, and email support.',
+      challenge: 'Patient inquiries, bookings, reminders, and appointment outcomes can become difficult to track when they are handled across disconnected tools or manual processes.',
+      solution: 'A structured GoHighLevel system was created to capture inquiries, organize contacts in a CRM pipeline, support appointment booking, automate reminders, handle no-shows, and provide clear workflow visibility.',
+      features: [
+        'Landing page and inquiry form',
+        'Appointment booking workflow',
+        'CRM pipeline organization',
+        'Automated confirmation and reminders',
+        'No-show follow-up',
+        'Appointment-attended workflow',
+        'Email communication templates',
+        'Workflow process map'
+      ],
+      images: [
+        { path: 'assets/images/motioncare/motioncare-landing-page.png', caption: 'Landing Page', alt: 'MotionCare physiotherapy landing page' },
+        { path: 'assets/images/motioncare/motioncare-inquiry-form.png', caption: 'Inquiry Form', alt: 'MotionCare patient inquiry form' },
+        { path: 'assets/images/motioncare/motioncare-pipeline.png', caption: 'CRM Pipeline', alt: 'MotionCare CRM opportunities pipeline' },
+        { path: 'assets/images/motioncare/motioncare-workflow.png', caption: 'Workflow Automation', alt: 'MotionCare workflow automation dashboard' },
+        { path: 'assets/images/motioncare/motioncare-process-map.png', caption: 'Process Map', alt: 'MotionCare automation process map' },
+        { path: 'assets/images/motioncare/motioncare-email-template.png', caption: 'Email Template', alt: 'MotionCare email communication templates' },
+        { path: 'assets/images/motioncare/motioncare-new-inquiry.jpg', caption: 'New Inquiry Workflow', alt: 'MotionCare new inquiry workflow diagram' },
+        { path: 'assets/images/motioncare/motioncare-no-show.jpg', caption: 'No-Show Workflow', alt: 'MotionCare no-show recovery workflow diagram' },
+        { path: 'assets/images/motioncare/motioncare-appointment-booked.jpg', caption: 'Appointment Booked', alt: 'MotionCare appointment booked workflow diagram' },
+        { path: 'assets/images/motioncare/motioncare-appointment-attended.jpg', caption: 'Appointment Attended', alt: 'MotionCare appointment attended workflow diagram' }
+      ]
+    },
+    'glow-haven': {
+      title: 'Glow Haven Booking & Automation System',
+      label: 'Portfolio Build',
+      overview: 'Glow Haven is a complete booking and automation portfolio build designed for a spa and salon business. It combines branded landing and booking pages, inquiry management, CRM pipeline organization, appointment workflows, customer follow-ups, review requests, and rebooking support.',
+      challenge: 'Service-based businesses can lose inquiries and repeat bookings when appointments, reminders, customer follow-ups, and pipeline updates are handled manually or across disconnected tools.',
+      solution: 'A structured GoHighLevel system was created to capture inquiries, organize opportunities, manage appointment communication, route completed and missed appointments, request reviews, and support future rebooking.',
+      features: [
+        'Branded landing page',
+        'Online booking page',
+        'Inquiry and opportunity management',
+        'Organized CRM pipeline',
+        'Appointment confirmation workflow',
+        'Booking reminder automation',
+        'No-show handling',
+        'Completed appointment routing',
+        'Review-request workflow',
+        'Rebooking automation',
+        'Nurture and follow-up workflow',
+        'Customer email templates'
+      ],
+      images: [
+        { path: 'assets/images/glow-haven/glow-haven-landing-page.png', caption: 'Landing Page', alt: 'Glow Haven spa and salon landing page' },
+        { path: 'assets/images/glow-haven/glow-haven-booking-page.png', caption: 'Booking Page', alt: 'Glow Haven customer booking and enquiry page' },
+        { path: 'assets/images/glow-haven/glow-haven-pipeline.png', caption: 'CRM Pipeline', alt: 'Glow Haven CRM opportunities pipeline' },
+        { path: 'assets/images/glow-haven/glow-haven-workflow-overview.png', caption: 'Workflow Overview', alt: 'Glow Haven workflow automation overview' },
+        { path: 'assets/images/glow-haven/glow-haven-workflow-01-new-enquiry.png', caption: 'New Enquiry Workflow', alt: 'Glow Haven new enquiry workflow diagram' },
+        { path: 'assets/images/glow-haven/glow-haven-workflow-02-booking-reminders.png', caption: 'Booking Reminders', alt: 'Glow Haven booking reminder workflow diagram' },
+        { path: 'assets/images/glow-haven/glow-haven-workflow-03-no-show.png', caption: 'No-Show Workflow', alt: 'Glow Haven no-show workflow diagram' },
+        { path: 'assets/images/glow-haven/glow-haven-workflow-04-completed.png', caption: 'Completed Appointment Workflow', alt: 'Glow Haven completed appointment workflow diagram' },
+        { path: 'assets/images/glow-haven/glow-haven-workflow-05-review.png', caption: 'Review Request Workflow', alt: 'Glow Haven review request workflow diagram' },
+        { path: 'assets/images/glow-haven/glow-haven-workflow-06-rebooking.png', caption: 'Rebooking Workflow', alt: 'Glow Haven rebooking workflow diagram' },
+        { path: 'assets/images/glow-haven/glow-haven-workflow-07-nurture.png', caption: 'Nurture Workflow', alt: 'Glow Haven long-term nurture workflow diagram' },
+        { path: 'assets/images/glow-haven/glow-haven-email-template.png', caption: 'Email Template', alt: 'Glow Haven customer email templates' }
+      ]
+    }
+  };
+
+  const projectModal = document.querySelector('[data-project-modal]');
+  const projectModalOpeners = Array.from(document.querySelectorAll('[data-project-modal-open]'));
+  const projectModalClose = projectModal?.querySelector('[data-project-modal-close]');
+  const projectModalLayout = projectModal?.querySelector('.project-modal-layout');
+  const projectModalLabel = projectModal?.querySelector('[data-project-modal-label]');
+  const projectModalTitle = projectModal?.querySelector('[data-project-modal-title]');
+  const projectModalOverview = projectModal?.querySelector('[data-project-modal-overview]');
+  const projectModalChallenge = projectModal?.querySelector('[data-project-modal-challenge]');
+  const projectModalSolution = projectModal?.querySelector('[data-project-modal-solution]');
+  const projectModalFeatures = projectModal?.querySelector('[data-project-modal-features]');
+  const projectGallery = projectModal?.querySelector('[data-project-gallery]');
+  const projectGalleryTrack = projectModal?.querySelector('[data-project-gallery-track]');
+  const projectGalleryThumbnails = projectModal?.querySelector('[data-project-gallery-thumbnails]');
+  const projectGalleryPrevious = projectModal?.querySelector('[data-project-gallery-previous]');
+  const projectGalleryNext = projectModal?.querySelector('[data-project-gallery-next]');
+  const projectGalleryCaption = projectModal?.querySelector('[data-project-gallery-caption]');
+  const projectGalleryCounter = projectModal?.querySelector('[data-project-gallery-counter]');
+  const projectGallerySwipeArea = projectModal?.querySelector('[data-project-gallery-swipe]');
+
+  if (projectModal && projectModalOpeners.length && projectModalClose && projectGalleryTrack && projectGalleryThumbnails) {
+    let activeProjectSlide = 0;
+    let projectSlides = [];
+    let projectThumbnails = [];
+    let lastFocusedElement = null;
+    let closeModalTimer = null;
+    let swipeStartX = null;
+
+    const getFocusableModalElements = () => Array.from(projectModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+      .filter((element) => !element.hasAttribute('disabled') && element.getAttribute('aria-hidden') !== 'true' && element.offsetParent !== null);
+
+    const showProjectSlide = (requestedIndex) => {
+      const slideCount = projectSlides.length;
+      if (!slideCount) return;
+      activeProjectSlide = (requestedIndex + slideCount) % slideCount;
+      projectGalleryTrack.style.transform = `translate3d(-${activeProjectSlide * 100}%, 0, 0)`;
+
+      projectSlides.forEach((slide, index) => {
+        slide.setAttribute('aria-hidden', String(index !== activeProjectSlide));
+      });
+
+      projectThumbnails.forEach((thumbnail, index) => {
+        thumbnail.setAttribute('aria-current', String(index === activeProjectSlide));
+      });
+
+      const activeSlide = projectSlides[activeProjectSlide];
+      if (projectGalleryCaption) projectGalleryCaption.textContent = activeSlide.dataset.caption || '';
+      if (projectGalleryCounter) projectGalleryCounter.textContent = `${activeProjectSlide + 1} / ${slideCount}`;
+
+      const activeThumbnail = projectThumbnails[activeProjectSlide];
+      if (activeThumbnail) {
+        const centeredScrollPosition = activeThumbnail.offsetLeft - (projectGalleryThumbnails.clientWidth - activeThumbnail.offsetWidth) / 2;
+        projectGalleryThumbnails.scrollTo({
+          left: Math.max(0, centeredScrollPosition),
+          behavior: reducedMotionQuery.matches ? 'auto' : 'smooth'
+        });
+      }
+    };
+
+    const renderProjectGallery = (projectKey) => {
+      const project = projectGalleryData[projectKey];
+      if (!project) return false;
+
+      projectModal.dataset.project = projectKey;
+      projectModalLabel.textContent = project.label;
+      projectModalTitle.textContent = project.title;
+      projectModalOverview.textContent = project.overview;
+      projectModalChallenge.textContent = project.challenge;
+      projectModalSolution.textContent = project.solution;
+      projectGallery.setAttribute('aria-label', `${project.title} project images`);
+      projectGalleryThumbnails.setAttribute('aria-label', `Choose a ${project.title} image`);
+      projectModalClose.setAttribute('aria-label', `Close ${project.title} project gallery`);
+
+      const featureItems = project.features.map((feature) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = feature;
+        return listItem;
+      });
+      projectModalFeatures.replaceChildren(...featureItems);
+
+      const slides = project.images.map((image, index) => {
+        const figure = document.createElement('figure');
+        figure.className = 'project-gallery-slide';
+        figure.dataset.caption = image.caption;
+        figure.setAttribute('aria-hidden', String(index !== 0));
+
+        const screenshot = document.createElement('img');
+        screenshot.src = image.path;
+        screenshot.alt = image.alt;
+        screenshot.loading = index === 0 ? 'eager' : 'lazy';
+        screenshot.draggable = false;
+        figure.append(screenshot);
+        return figure;
+      });
+
+      const thumbnails = project.images.map((image, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.projectSlideIndex = String(index);
+        button.setAttribute('aria-label', `Show ${image.caption}`);
+        button.setAttribute('aria-current', String(index === 0));
+
+        const thumbnail = document.createElement('img');
+        thumbnail.src = image.path;
+        thumbnail.alt = '';
+        thumbnail.loading = 'lazy';
+        button.append(thumbnail);
+        return button;
+      });
+
+      projectGalleryTrack.replaceChildren(...slides);
+      projectGalleryThumbnails.replaceChildren(...thumbnails);
+      projectSlides = Array.from(projectGalleryTrack.querySelectorAll('.project-gallery-slide'));
+      projectThumbnails = Array.from(projectGalleryThumbnails.querySelectorAll('[data-project-slide-index]'));
+      projectModalLayout.scrollTop = 0;
+      projectGalleryThumbnails.scrollLeft = 0;
+      activeProjectSlide = 0;
+      return true;
+    };
+
+    const finishClosingProjectModal = () => {
+      projectModal.hidden = true;
+      document.body.classList.remove('modal-open');
+      closeModalTimer = null;
+      if (lastFocusedElement instanceof HTMLElement && lastFocusedElement.isConnected) lastFocusedElement.focus();
+    };
+
+    const openProjectModal = (projectKey, opener) => {
+      if (!renderProjectGallery(projectKey)) return;
+      if (closeModalTimer !== null) {
+        window.clearTimeout(closeModalTimer);
+        closeModalTimer = null;
+      }
+
+      lastFocusedElement = opener;
+      projectModal.hidden = false;
+      document.body.classList.add('modal-open');
+      showProjectSlide(0);
+      window.requestAnimationFrame(() => projectModal.classList.add('is-open'));
+      projectModalClose.focus();
+    };
+
+    const closeProjectModal = () => {
+      if (projectModal.hidden || closeModalTimer !== null) return;
+      projectModal.classList.remove('is-open');
+      const closeDelay = reducedMotionQuery.matches ? 0 : 230;
+      closeModalTimer = window.setTimeout(finishClosingProjectModal, closeDelay);
+    };
+
+    projectModalOpeners.forEach((opener) => {
+      opener.addEventListener('click', () => openProjectModal(opener.dataset.projectModalOpen, opener));
+    });
+    projectModalClose.addEventListener('click', closeProjectModal);
+    projectGalleryPrevious?.addEventListener('click', () => showProjectSlide(activeProjectSlide - 1));
+    projectGalleryNext?.addEventListener('click', () => showProjectSlide(activeProjectSlide + 1));
+
+    projectGalleryThumbnails.addEventListener('click', (event) => {
+      if (!(event.target instanceof Element)) return;
+      const thumbnail = event.target.closest('[data-project-slide-index]');
+      if (!thumbnail || !projectGalleryThumbnails.contains(thumbnail)) return;
+      showProjectSlide(Number(thumbnail.dataset.projectSlideIndex));
+    });
+
+    projectModal.addEventListener('click', (event) => {
+      if (event.target === projectModal) closeProjectModal();
+    });
+
+    projectModal.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeProjectModal();
+        return;
+      }
+
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        showProjectSlide(activeProjectSlide - 1);
+        return;
+      }
+
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        showProjectSlide(activeProjectSlide + 1);
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+      const focusableElements = getFocusableModalElements();
+      if (!focusableElements.length) return;
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstFocusable) {
+        event.preventDefault();
+        lastFocusable.focus();
+      } else if (!event.shiftKey && document.activeElement === lastFocusable) {
+        event.preventDefault();
+        firstFocusable.focus();
+      }
+    });
+
+    projectGallerySwipeArea?.addEventListener('pointerdown', (event) => {
+      if (event.button !== 0) return;
+      swipeStartX = event.clientX;
+      projectGallerySwipeArea.setPointerCapture?.(event.pointerId);
+    });
+
+    projectGallerySwipeArea?.addEventListener('pointerup', (event) => {
+      if (swipeStartX === null) return;
+      const swipeDistance = event.clientX - swipeStartX;
+      swipeStartX = null;
+      if (Math.abs(swipeDistance) < 45) return;
+      showProjectSlide(activeProjectSlide + (swipeDistance < 0 ? 1 : -1));
+    });
+
+    projectGallerySwipeArea?.addEventListener('pointercancel', () => {
+      swipeStartX = null;
+    });
+  }
+
   const form = document.querySelector('[data-contact-form]');
   const formStatus = document.querySelector('[data-form-status]');
 
