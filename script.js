@@ -583,6 +583,21 @@
     });
   }
 
+  document.querySelectorAll('[data-tool-marquee]').forEach((marquee) => {
+    const track = marquee.querySelector('.tool-track');
+    const sequence = track?.querySelector('.tool-sequence');
+    if (!track || !sequence || track.children.length > 1) return;
+
+    const duplicateSequence = sequence.cloneNode(true);
+    duplicateSequence.setAttribute('aria-hidden', 'true');
+    duplicateSequence.removeAttribute('role');
+    duplicateSequence.querySelectorAll('[role], [tabindex]').forEach((item) => {
+      item.removeAttribute('role');
+      item.removeAttribute('tabindex');
+    });
+    track.append(duplicateSequence);
+  });
+
   const yearElement = document.querySelector('[data-current-year]');
   if (yearElement) yearElement.textContent = new Date().getFullYear();
 })();
