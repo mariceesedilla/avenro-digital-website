@@ -13,8 +13,8 @@
   <meta property="og:image" content="assets/images/avenro-logo.png">
   <meta property="og:url" content="https://avenrodigital.com/">
   <link rel="icon" type="image/png" href="assets/images/avenro-logo.png">
-  <link rel="stylesheet" href="styles.css?v=20260801-12">
-  <script src="script.js?v=20260801-12" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20260802-1">
+  <script src="script.js?v=20260802-1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -329,34 +329,26 @@
           <div class="contact-detail"><span aria-hidden="true">✉</span><div><small>Email us</small><a href="mailto:hello@avenrodigital.com">hello@avenrodigital.com</a></div></div>
           <div class="contact-detail"><span aria-hidden="true">◷</span><div><small>Response time</small><strong>We’ll get back to you as soon as we can.</strong></div></div>
         </div>
-        <form class="contact-form reveal delay-one" data-contact-form novalidate>
-          <!-- Future GoHighLevel workflow:
-            1. Create or update the contact.
-            2. Create a new pipeline opportunity.
-            3. Notify the Avenro Digital team.
-            4. Send a confirmation email.
-            5. Redirect the prospect to a thank-you or booking page.
-          -->
-          <div class="form-row">
-            <div class="form-field"><label for="full-name">Full Name <span>*</span></label><input id="full-name" name="full-name" type="text" autocomplete="name" placeholder="Your full name" required></div>
-            <div class="form-field"><label for="business-name">Business Name</label><input id="business-name" name="business-name" type="text" autocomplete="organization" placeholder="Your business name"></div>
-          </div>
-          <div class="form-row">
-            <div class="form-field"><label for="email">Email Address <span>*</span></label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@business.com" required></div>
-            <div class="form-field"><label for="phone">Phone Number</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="Your phone number"></div>
-          </div>
-          <div class="form-row">
-            <div class="form-field"><label for="contact-method">Preferred Contact Method <span>*</span></label><select id="contact-method" name="contact-method" required><option value="">Select a contact method</option><option>Email</option><option>Phone call</option><option>Text message</option></select></div>
-            <div class="form-field"><label for="start-date">Expected Start Date</label><input id="start-date" name="start-date" type="date"></div>
-          </div>
-          <div class="form-field"><label for="service">Project Type or Service Needed <span>*</span></label><select id="service" name="service" required><option value="">Select a service</option><option>CRM &amp; Workflow Automation</option><option>Websites &amp; Landing Pages</option><option>Social Media Management</option><option>Video Editing &amp; Graphic Design</option><option>Copywriting &amp; Content Support</option><option>Not sure yet</option></select></div>
-          <div class="form-field"><label for="message">Message <span>*</span></label><textarea id="message" name="message" rows="5" placeholder="Tell us about your goals, challenges, or project..." required></textarea></div>
-          <button class="button button-primary submit-button" type="submit">Send Your Inquiry <span aria-hidden="true">→</span></button>
-          <p class="form-note">Your information will only be used to respond to your inquiry and discuss your project.</p>
-          <!-- Replace #contact with the live scheduling URL when the booking calendar is ready. -->
-          <p class="booking-option">Prefer to talk first? <a href="#contact">Book a Free Consultation</a>.</p>
-          <div class="form-status" data-form-status role="status" aria-live="polite" tabindex="-1"></div>
-        </form>
+        <div class="contact-form ghl-form-embed reveal delay-one">
+          <iframe
+              src="https://api.leadconnectorhq.com/widget/form/V3dG47oCU8AIWqUblOYT"
+              style="width:100%;height:100%;border:none;border-radius:8px"
+              id="inline-V3dG47oCU8AIWqUblOYT"
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="Avenro Digital – Website Inquiry Form"
+              data-height="1035"
+              data-layout-iframe-id="inline-V3dG47oCU8AIWqUblOYT"
+              data-form-id="V3dG47oCU8AIWqUblOYT"
+              title="Avenro Digital – Website Inquiry Form"
+          ></iframe>
+          <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+        </div>
       </div>
     </section>
   </main>

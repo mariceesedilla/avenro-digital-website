@@ -583,41 +583,6 @@
     });
   }
 
-  const form = document.querySelector('[data-contact-form]');
-  const formStatus = document.querySelector('[data-form-status]');
-
-  form?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const requiredFields = Array.from(form.querySelectorAll('[required]'));
-    let firstInvalidField = null;
-
-    requiredFields.forEach((field) => {
-      const isValid = field.checkValidity();
-      field.setAttribute('aria-invalid', String(!isValid));
-      if (!isValid && !firstInvalidField) firstInvalidField = field;
-    });
-
-    formStatus.classList.add('show');
-    if (firstInvalidField) {
-      formStatus.classList.add('error');
-      formStatus.textContent = 'Please complete the required fields and enter a valid email address.';
-      firstInvalidField.focus();
-      return;
-    }
-
-    formStatus.classList.remove('error');
-    formStatus.textContent = 'Thanks for reaching out! This demo form is working. We’ll connect it to secure message delivery when the website goes live.';
-    form.reset();
-    requiredFields.forEach((field) => field.removeAttribute('aria-invalid'));
-    formStatus.focus();
-  });
-
-  form?.querySelectorAll('input, select, textarea').forEach((field) => {
-    field.addEventListener('input', () => {
-      if (field.checkValidity()) field.removeAttribute('aria-invalid');
-    });
-  });
-
   const yearElement = document.querySelector('[data-current-year]');
   if (yearElement) yearElement.textContent = new Date().getFullYear();
 })();
