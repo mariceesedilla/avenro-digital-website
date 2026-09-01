@@ -319,6 +319,25 @@ em { color: var(--teal); font-style: normal; }
 
 .site-footer { padding-top: 75px; color: #91a5bc; background: var(--navy); }.footer-grid { display: grid; grid-template-columns: 1.45fr .62fr .9fr 1fr; gap: 55px; padding-bottom: 58px; }.footer-brand > p { max-width: 350px; margin: 18px 0 15px; font-size: .8rem; }.footer-brand .footer-tagline { margin-top: 22px; margin-bottom: 0; color: #62cbd0; font-size: .68rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }.footer-email { color: #d5e2ef; font-size: .78rem; font-weight: 750; }.footer-email:hover { color: var(--gold); }.social-placeholders { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }.social-placeholders span { padding: 5px 9px; border: 1px solid rgba(255,255,255,.1); border-radius: 20px; color: #788da5; font-size: .58rem; }.footer-column { display: flex; flex-direction: column; align-items: flex-start; gap: 11px; }.footer-column h2 { margin-bottom: 8px; color: var(--white); font-size: .76rem; letter-spacing: .03em; }.footer-column a { font-size: .75rem; transition: color var(--transition); }.footer-column > a:hover { color: var(--white); }.footer-action p { margin-bottom: 10px; font-size: .75rem; }.footer-bottom { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; border-top: 1px solid rgba(255,255,255,.08); }.footer-bottom p { margin: 0; font-size: .66rem; }
 
+.privacy-hero { position: relative; overflow: hidden; padding: 174px 0 92px; color: #b9c9da; background: radial-gradient(circle at 78% 30%, rgba(0,122,133,.18), transparent 31%), linear-gradient(125deg, var(--navy) 10%, var(--midnight) 60%, #06294c 100%); }
+.privacy-hero::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 54px 54px; content: ""; mask-image: linear-gradient(to bottom, black, transparent 94%); }
+.privacy-hero .container { position: relative; z-index: 1; }
+.privacy-hero h1 { margin-bottom: 17px; color: var(--white); font-size: clamp(2.75rem,5vw,4.5rem); }
+.privacy-hero h1 em { color: #6dc1c7; }
+.privacy-updated { margin: 0; color: #a9bbcf; font-size: .84rem; }
+.privacy-policy { padding: 92px 0 110px; background: var(--soft-white); }
+.privacy-content { width: min(calc(100% - 40px), 820px); margin-inline: auto; padding: 54px 58px; border: 1px solid #dce4ee; border-radius: var(--radius); background: var(--white); box-shadow: 0 18px 48px rgba(3,21,47,.07); }
+.privacy-intro { margin-bottom: 42px; padding-bottom: 32px; border-bottom: 1px solid #e2e8ef; color: #3f526a; font-size: 1rem; }
+.privacy-content section + section { margin-top: 38px; }
+.privacy-content h2 { margin-bottom: 13px; color: var(--ink); font-size: clamp(1.35rem,2.4vw,1.72rem); letter-spacing: -.025em; }
+.privacy-content p { margin-bottom: 0; }
+.privacy-content p + p { margin-top: 14px; }
+.privacy-content ul { display: grid; gap: 9px; margin: 17px 0 0; padding: 0; list-style: none; }
+.privacy-content li { position: relative; padding-left: 22px; }
+.privacy-content li::before { position: absolute; top: .7em; left: 2px; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px rgba(15,166,166,.09); content: ""; }
+.privacy-content a { color: var(--teal); font-weight: 750; }
+.privacy-content a:hover { text-decoration: underline; }
+
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 700ms ease, transform 700ms ease; }.reveal.delay-one { transition-delay: 110ms; }.reveal.delay-two { transition-delay: 220ms; }.reveal.visible { opacity: 1; transform: translateY(0); }
 
 @media (max-width: 1020px) {
@@ -379,6 +398,7 @@ em { color: var(--teal); font-style: normal; }
   .project-gallery-thumbnails button { width: 68px; height: 49px; flex-basis: 68px; }
   .project-gallery-hint { margin-top: 5px; }
   .contact-grid { gap: 38px; }.contact-form { padding: 23px 17px; }.form-row { grid-template-columns: 1fr; gap: 0; }.footer-grid { grid-template-columns: 1fr 1fr; }.footer-brand { grid-column: 1 / -1; }.footer-action { grid-column: 1 / -1; flex-direction: column; align-items: flex-start; }.footer-bottom { align-items: flex-start; gap: 8px; flex-direction: column; }
+  .privacy-hero { padding: 124px 0 66px; }.privacy-hero h1 { margin-bottom: 12px; font-size: 2.4rem; }.privacy-policy { padding: 55px 0 72px; }.privacy-content { width: min(calc(100% - 28px), 820px); padding: 32px 22px; border-radius: 14px; }.privacy-intro { margin-bottom: 32px; padding-bottom: 26px; font-size: .94rem; }.privacy-content section + section { margin-top: 31px; }.privacy-content h2 { font-size: 1.28rem; }
   .system-visual.visible .status-dot, .system-visual.visible .live-badge, .system-visual.visible .check, .system-visual.visible .orbit-one, .system-visual.visible .orbit-two { animation: none; }
 }
 
