@@ -438,6 +438,39 @@ em { color: var(--teal); font-style: normal; }
   .privacy-hero { padding: 124px 0 66px; }.privacy-hero h1 { margin-bottom: 12px; font-size: 2.4rem; }.privacy-policy { padding: 55px 0 72px; }.privacy-content { width: min(calc(100% - 28px), 820px); padding: 32px 22px; border-radius: 14px; }.privacy-intro { margin-bottom: 32px; padding-bottom: 26px; font-size: .94rem; }.privacy-content section + section { margin-top: 31px; }.privacy-content h2 { font-size: 1.28rem; }
 }
 
+@media (max-width: 768px) {
+  .hero { min-height: auto; padding: clamp(116px,16vw,126px) 0 68px; }
+  .hero-grid { min-width: 0; gap: 32px; }
+  .hero-copy { min-width: 0; }
+  .hero-copy .eyebrow { max-width: 100%; gap: 8px; font-size: .66rem; letter-spacing: .14em; line-height: 1.55; }
+  .hero-copy .eyebrow span { width: 20px; flex: 0 0 20px; }
+  .hero h1 { max-width: 100%; margin-bottom: 22px; font-size: clamp(1.78rem,7.3vw,2.3rem); line-height: 1.12; }
+  .hero h1 > span, .hero h1 .hero-title-prefix, .hero h1 em { white-space: normal; }
+  .hero-lead { max-width: 620px; margin-bottom: 28px; font-size: clamp(.94rem,2.4vw,1rem); }
+  .hero-copy .button-group { width: min(100%,520px); margin-inline: auto; }
+  .hero-copy .button { min-width: 0; }
+  .hero-trust { max-width: 560px; justify-content: center; gap: 10px 16px; margin-right: auto; margin-left: auto; }
+  .system-visual { width: min(100%,560px); min-width: 0; min-height: clamp(410px,59vw,450px); margin-right: auto; margin-left: auto; }
+  .website-browser { max-width: 100%; }
+  .website-float-card { max-width: calc(100% - 8px); }
+  .website-float-card strong, .website-float-card small { white-space: normal; }
+
+  .services-heading { width: min(100%,680px); margin-bottom: 28px; }
+  .services-heading .eyebrow { gap: 8px; font-size: .66rem; letter-spacing: .14em; }
+  .services-heading .eyebrow span { width: 20px; flex: 0 0 20px; }
+  .services-heading h2 { font-size: clamp(1.8rem,6.8vw,2.5rem); line-height: 1.13; text-wrap: balance; }
+  .services-heading > p:last-child { font-size: .92rem; line-height: 1.68; }
+  .services-showcase { width: 100%; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  .service-browser-shell, .service-browser, .service-float, .service-float-card { min-width: 0; max-width: 100%; }
+  .service-browser-shell { width: 100%; margin-bottom: 56px; }
+  .service-browser { width: 100%; }
+  .service-browser-note { max-width: calc(100% - 20px); }
+  .service-float-card { height: 100%; }
+  .service-float h3 { overflow-wrap: anywhere; }
+  .services-action { max-width: 620px; margin-top: 30px; padding-inline: 8px; }
+  .services-action p { max-width: 540px; }
+}
+
 @media (max-width: 420px) {
   .services-showcase { grid-template-columns: 1fr; }
   .service-float-card { min-height: 76px; }
