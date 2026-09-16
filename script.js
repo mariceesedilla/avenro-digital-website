@@ -61,92 +61,31 @@
     document.querySelector('.process-list')?.classList.add('is-active');
   }
 
-  const progressRing = document.querySelector('[data-progress-ring]');
-
-  const setProgress = (value) => {
-    if (!progressRing) return;
-    const targetValue = Number(progressRing.dataset.progressValue) || 86;
-    const safeValue = Math.min(Math.max(value, 0), targetValue);
-    progressRing.style.setProperty('--progress', `${safeValue}%`);
-    const label = progressRing.querySelector('span');
-    if (label) label.textContent = `${Math.round(safeValue)}%`;
-  };
-
-  const animateProgress = () => {
-    if (!progressRing || progressRing.dataset.animated === 'true') return;
-    progressRing.dataset.animated = 'true';
-    const targetValue = Number(progressRing.dataset.progressValue) || 86;
-
-    if (reducedMotionQuery.matches) {
-      setProgress(targetValue);
-      return;
-    }
-
-    const duration = 1450;
-    let startTime = null;
-    setProgress(0);
-
-    const updateProgress = (timestamp) => {
-      if (reducedMotionQuery.matches) {
-        setProgress(targetValue);
-        return;
-      }
-
-      if (startTime === null) startTime = timestamp;
-      const elapsed = Math.min((timestamp - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - elapsed, 3);
-      setProgress(targetValue * eased);
-
-      if (elapsed < 1) {
-        window.requestAnimationFrame(updateProgress);
-      } else {
-        setProgress(targetValue);
-        progressRing.classList.add('is-complete');
-      }
-    };
-
-    window.requestAnimationFrame(updateProgress);
-  };
-
-  if (progressRing) {
-    if (reducedMotionQuery.matches || !('IntersectionObserver' in window)) {
-      animateProgress();
-    } else {
-      setProgress(0);
-      const progressObserver = new IntersectionObserver((entries, observer) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        animateProgress();
-        observer.disconnect();
-      }, { threshold: 0.45 });
-      progressObserver.observe(progressRing);
-    }
-  }
-
-  const systemVisual = document.querySelector('.system-visual');
+  const websiteVisual = document.querySelector('.website-visual');
   const parallaxQuery = window.matchMedia('(min-width: 1021px) and (hover: hover) and (pointer: fine)');
-  const parallaxLayers = systemVisual ? [
-    { element: systemVisual.querySelector('.main-system-card'), depth: 0.38 },
-    { element: systemVisual.querySelector('.floating-card-left'), depth: 0.68 },
-    { element: systemVisual.querySelector('.floating-card-right'), depth: 0.86 },
-    { element: systemVisual.querySelector('.completion-card'), depth: 0.55 }
+  const parallaxLayers = websiteVisual ? [
+    { element: websiteVisual.querySelector('.website-browser'), depth: 0.38 },
+    { element: websiteVisual.querySelector('.website-float-mobile'), depth: 0.68 },
+    { element: websiteVisual.querySelector('.website-float-inquiry'), depth: 0.86 },
+    { element: websiteVisual.querySelector('.website-float-action'), depth: 0.55 }
   ].filter((layer) => layer.element) : [];
   let parallaxFrame = null;
   let pointerPosition = null;
 
   const resetParallax = () => {
-    if (!systemVisual) return;
+    if (!websiteVisual) return;
     parallaxLayers.forEach(({ element }) => { element.style.translate = '0 0'; });
-    systemVisual.classList.remove('is-parallax-active');
+    websiteVisual.classList.remove('is-parallax-active');
   };
 
   const updateParallax = () => {
     parallaxFrame = null;
-    if (!systemVisual || !pointerPosition || !parallaxQuery.matches || reducedMotionQuery.matches) {
+    if (!websiteVisual || !pointerPosition || !parallaxQuery.matches || reducedMotionQuery.matches) {
       resetParallax();
       return;
     }
 
-    const bounds = systemVisual.getBoundingClientRect();
+    const bounds = websiteVisual.getBoundingClientRect();
     const normalizedX = ((pointerPosition.x - bounds.left) / bounds.width - 0.5) * 2;
     const normalizedY = ((pointerPosition.y - bounds.top) / bounds.height - 0.5) * 2;
 
@@ -155,15 +94,15 @@
       const y = Math.max(-8, Math.min(8, normalizedY * 8 * depth));
       element.style.translate = `${x.toFixed(2)}px ${y.toFixed(2)}px`;
     });
-    systemVisual.classList.add('is-parallax-active');
+    websiteVisual.classList.add('is-parallax-active');
   };
 
-  systemVisual?.addEventListener('pointermove', (event) => {
+  websiteVisual?.addEventListener('pointermove', (event) => {
     if (!parallaxQuery.matches || reducedMotionQuery.matches) return;
     pointerPosition = { x: event.clientX, y: event.clientY };
     if (parallaxFrame === null) parallaxFrame = window.requestAnimationFrame(updateParallax);
   }, { passive: true });
-  systemVisual?.addEventListener('pointerleave', () => {
+  websiteVisual?.addEventListener('pointerleave', () => {
     pointerPosition = null;
     resetParallax();
   });
