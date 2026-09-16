@@ -109,6 +109,51 @@
   parallaxQuery.addEventListener?.('change', resetParallax);
   reducedMotionQuery.addEventListener?.('change', resetParallax);
 
+  const servicesShowcase = document.querySelector('[data-services-showcase]');
+  const servicesParallaxQuery = window.matchMedia('(min-width: 1101px) and (hover: hover) and (pointer: fine)');
+  const servicesDepthLayers = servicesShowcase
+    ? Array.from(servicesShowcase.querySelectorAll('[data-service-depth]')).map((element) => ({
+      element,
+      depth: Number(element.dataset.serviceDepth) || 0.5
+    }))
+    : [];
+  let servicesParallaxFrame = null;
+  let servicesPointerPosition = null;
+
+  const resetServicesParallax = () => {
+    servicesDepthLayers.forEach(({ element }) => { element.style.translate = '0 0'; });
+  };
+
+  const updateServicesParallax = () => {
+    servicesParallaxFrame = null;
+    if (!servicesShowcase || !servicesPointerPosition || !servicesParallaxQuery.matches || reducedMotionQuery.matches) {
+      resetServicesParallax();
+      return;
+    }
+
+    const bounds = servicesShowcase.getBoundingClientRect();
+    const normalizedX = ((servicesPointerPosition.x - bounds.left) / bounds.width - 0.5) * 2;
+    const normalizedY = ((servicesPointerPosition.y - bounds.top) / bounds.height - 0.5) * 2;
+
+    servicesDepthLayers.forEach(({ element, depth }) => {
+      const x = Math.max(-6, Math.min(6, normalizedX * 6 * depth));
+      const y = Math.max(-6, Math.min(6, normalizedY * 6 * depth));
+      element.style.translate = `${x.toFixed(2)}px ${y.toFixed(2)}px`;
+    });
+  };
+
+  servicesShowcase?.addEventListener('pointermove', (event) => {
+    if (!servicesParallaxQuery.matches || reducedMotionQuery.matches) return;
+    servicesPointerPosition = { x: event.clientX, y: event.clientY };
+    if (servicesParallaxFrame === null) servicesParallaxFrame = window.requestAnimationFrame(updateServicesParallax);
+  }, { passive: true });
+  servicesShowcase?.addEventListener('pointerleave', () => {
+    servicesPointerPosition = null;
+    resetServicesParallax();
+  });
+  servicesParallaxQuery.addEventListener?.('change', resetServicesParallax);
+  reducedMotionQuery.addEventListener?.('change', resetServicesParallax);
+
   document.querySelectorAll('[data-project-toggle]').forEach((button) => {
     button.addEventListener('click', () => {
       const panelId = button.getAttribute('aria-controls');
