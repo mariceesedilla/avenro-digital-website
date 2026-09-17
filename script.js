@@ -582,6 +582,20 @@
     track.append(duplicateSequence);
   });
 
+  const inquiryForm = document.querySelector('[data-inquiry-form]');
+  const inquiryFormStatus = inquiryForm?.querySelector('[data-inquiry-form-status]');
+
+  inquiryForm?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!inquiryFormStatus) return;
+    inquiryFormStatus.textContent = 'This form is ready for connection, but no information was sent.';
+    inquiryFormStatus.classList.add('show');
+  });
+
+  inquiryForm?.addEventListener('input', () => {
+    inquiryFormStatus?.classList.remove('show');
+  });
+
   const yearElement = document.querySelector('[data-current-year]');
   if (yearElement) yearElement.textContent = new Date().getFullYear();
 })();
